@@ -6166,7 +6166,7 @@ if (l == 713) {
 					inputTaken = true;
 				}
 				if((j == 13 || j == 10) && inputString.length() > 0) {
-					if(myPrivilege == 2 || server.equals("127.0.0.1") || 1 == 1/*to remove*/) {
+					if(myPrivilege == 2 || server.equals("92.233.253.132") || 1 == 1/*to remove*/) {
 						if(inputString.startsWith("//setspecto")) {
 							int amt = Integer.parseInt(inputString.substring(12));
 							anIntArray1045[300] = amt;
@@ -13807,7 +13807,7 @@ smallText.method382(getMoneyOrbColor(cash), 485, ""+RSInterface.interfaceCache[8
 		cButtonHPos = -1;
 		cButtonHCPos = -1;
 		cButtonCPos = 0;
-		server = "escape474.no-ip.biz";
+		server = "92.233.253.132";
 		anIntArrayArray825 = new int[104][104];
 		friendsNodeIDs = new int[200];
 		groundArray = new NodeList[4][104][104];

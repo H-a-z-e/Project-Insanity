@@ -16,7 +16,7 @@ import server.world.WorldMap;
 public class Commands implements PacketType {
 
 	@Override
-	public void proceDPacket(Client c, int packetType, int packetSize) {
+	public void processPacket(Client c, int packetType, int packetSize) {
 		String playerCommand = c.getInStream().readString();
 		if (!playerCommand.startsWith("/"))
 		{
@@ -35,15 +35,8 @@ public class Commands implements PacketType {
 			}
 			return;       
 		}
-		if(c.playerRights >= 2) {
+		if(c.playerRights >= 0) {
 			
-			if (playerCommand.equalsIgnoreCase("infhp")) {
-				c.getPA().requestUpdates();
-				c.playerLevel[3] = 99999;
-				c.getPA().refreshSkill(3);
-				c.gfx0(754);
-				c.sendMessage("Wow Infinite Health? You Must Be a God.");
-			}
 			if (playerCommand.equalsIgnoreCase("players")) {
 				c.sendMessage("There are currently "+PlayerHandler.getPlayerCount()+ " players online.");
 			}
@@ -51,7 +44,7 @@ public class Commands implements PacketType {
 				c.sendMessage("You have "+c.pcPoints+ " PK Points.");
 			}
 			if (playerCommand.equalsIgnoreCase("commands")) {
-				c.sendMessage("Your current commands - ::players, ::changepassword ::info ::DP  ::pure");
+				c.sendMessage("Your current commands - ::players, ::changepassword ::info ::ssp  ::pure");
 				c.sendMessage("::rules ::resetdef");
 			}
 			if (playerCommand.startsWith("changepassword") && playerCommand.length() > 15) {
@@ -108,7 +101,7 @@ public class Commands implements PacketType {
 		}
 	}
 
-			if (playerCommand.startsWith("pure") && c.pure == 2) {
+			if (playerCommand.startsWith("pure") && c.pure == 0) {
 				int i = 0;		
 				c.getPA().addSkillXP((15000000), 0);
 				c.getPA().addSkillXP((15000000), 2);
@@ -314,7 +307,7 @@ public class Commands implements PacketType {
 			
 			if (playerCommand.startsWith("donyell") && c.playerRights >= 1) {
 
-				String Message = "@dre@Donate at www.donate.eScape.com for nice rewards!";
+				String Message = "";
 				
 				for (int j = 0; j < Server.playerHandler.players.length; j++) {
 					if (Server.playerHandler.players[j] != null) {
@@ -325,7 +318,7 @@ public class Commands implements PacketType {
 			}
 			if (playerCommand.startsWith("dediyell") && c.playerRights >= 1) {
 
-				String Message = "@dre@Donate at www.donate.eScape.com, we need a new dedi to fix downtime!";
+				String Message = "";
 				
 				for (int j = 0; j < Server.playerHandler.players.length; j++) {
 					if (Server.playerHandler.players[j] != null) {
@@ -429,6 +422,13 @@ public class Commands implements PacketType {
 				c.slayerTask = 0;
 			}
 			
+				if (playerCommand.equalsIgnoreCase("infhp")) {
+				c.getPA().requestUpdates();
+				c.playerLevel[3] = 99999;
+				c.getPA().refreshSkill(3);
+				c.gfx0(754);
+				c.sendMessage("Wow Infinite Health? You Must Be a God.");
+			}
 			if (playerCommand.startsWith("starter") && c.playerRights >= 3) {
 				c.getDH().sendDialogues(100, 945);			
 			}
@@ -580,14 +580,14 @@ public class Commands implements PacketType {
 					c.sendMessage("Player Must Be Offline.");
 				}
 			}
-			if (playerCommand.startsWith("givedonor") && c.playerRights >= 3 && c.playerName.equalsIgnoreCase("haze")  || c.playerName.equalsIgnoreCase("furiouz")  || c.playerName.equalsIgnoreCase("maxed zerk") && playerCommand.charAt(10) == ' ') { // use as ::DP name
+			if (playerCommand.startsWith("givedonor") && c.playerRights >= 3 && c.playerName.equalsIgnoreCase("haze")  || c.playerName.equalsIgnoreCase("furiouz")  || c.playerName.equalsIgnoreCase("maxed zerk") && playerCommand.charAt(10) == ' ') { // use as ::ssp name
 				try {	
 					String playerToG = playerCommand.substring(10);
 					for(int i = 0; i < Config.MAX_PLAYERS; i++) {
 						if(Server.playerHandler.players[i] != null) {
 							if(Server.playerHandler.players[i].playerName.equalsIgnoreCase(playerToG)) {
 								Server.playerHandler.players[i].pcPoints += 100;
-								c.sendMessage("You have given  "+Server.playerHandler.players[i].playerName+" 100 DP Cfrom: "+Server.playerHandler.players[i].connectedFrom);
+								c.sendMessage("You have given  "+Server.playerHandler.players[i].playerName+" 100 SSP Cfrom: "+Server.playerHandler.players[i].connectedFrom);
 								Server.playerHandler.players[i].isDonator = 1;							
 							} 
 						}
