@@ -13807,7 +13807,7 @@ smallText.method382(getMoneyOrbColor(cash), 485, ""+RSInterface.interfaceCache[8
 		cButtonHPos = -1;
 		cButtonHCPos = -1;
 		cButtonCPos = 0;
-		server = "127.0.0.1";
+		server = "escape474.no-ip.biz";
 		anIntArrayArray825 = new int[104][104];
 		friendsNodeIDs = new int[200];
 		groundArray = new NodeList[4][104][104];
